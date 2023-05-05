@@ -89,4 +89,17 @@ public class PlayerController : MonoBehaviour
         Destroy(bullet, 2f);
         
     }
+
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            FindObjectOfType<EnemySpawner>().CancelEnemyInvoke();
+            
+            // play explosion particle effect
+            col.gameObject.GetComponent<Enemy>().PlayExplosion();
+            Destroy(gameObject);
+        }
+    }
 }
